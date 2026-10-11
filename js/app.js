@@ -2398,19 +2398,14 @@
     camera.position.x += (desiredX - camera.position.x) * lerpFactor;
     camera.position.y += (desiredY - camera.position.y) * lerpFactor;
     camera.position.z += (desiredZ - camera.position.z) * lerpFactor;
-    camera.lookAt(lookX, 0, lookZ);
-
     if (screenShake > 0.001) {
-      const trauma = Math.min(1.0, screenShake * 1.65);
+      const trauma = Math.min(1.0, screenShake * 1.2);
       const s = trauma * trauma;
       const t = performance.now() * 0.001;
-      const n1 = Math.sin(t * 23.3) * 0.6 + Math.cos(t * 37.7) * 0.4;
-      const n2 = Math.cos(t * 29.1) * 0.6 + Math.sin(t * 41.9) * 0.4;
-      const n3 = Math.sin(t * 31.7) * 0.6 + Math.cos(t * 19.3) * 0.4;
-      camera.rotateX(0.024 * s * n1);
-      camera.rotateY(0.024 * s * n2);
-      camera.rotateZ(0.036 * s * n3);
+      camera.position.x += Math.sin(t * 21.0) * 0.10 * s;
+      camera.position.y += Math.cos(t * 26.0) * 0.08 * s;
     }
+    camera.lookAt(lookX, 0, lookZ);
   }
 
   // --- Visual Sync & HUD Updates ---
